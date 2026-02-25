@@ -9,10 +9,13 @@ My Claude Code commands and configuration, managed via symlinks.
   .claude/
     commands/
       systems-architect.md      ← real file, edit this one
+  .zshrc                        ← boilerplate, sources .zshrc.local
 
 ~/.claude/
   commands/
     systems-architect.md        ← symlink (just a pointer)
+~/.zshrc                        ← symlink (just a pointer)
+~/.zshrc.local                  ← plain file, machine-specific, NOT in repo
 ```
 
 ## Editing a command
@@ -30,15 +33,36 @@ git push
 
 Changes are live in Claude the moment you save — no restart needed.
 
+## .zshrc setup
+
+`~/dotfiles/.zshrc` is a minimal boilerplate — it just loads the machine-specific config:
+
+```bash
+# Machine-specific config (not in repo)
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+```
+
+**`~/.zshrc.local`** is a plain, untracked file on each machine. Put anything device-specific there (custom functions, SSH shortcuts, PATH additions). It is never committed.
+
+As you identify config that belongs on every machine, promote it up into `dotfiles/.zshrc`.
+
+| File | In repo? | Symlinked? | Purpose |
+|------|----------|------------|---------|
+| `~/dotfiles/.zshrc` | Yes | Source | Shared boilerplate |
+| `~/.zshrc` | No | Yes (pointer) | Points to dotfiles |
+| `~/.zshrc.local` | No | No (plain file) | Machine-specific, never tracked |
+
 ## Restoring on a new machine
 
 ```bash
 git clone https://github.com/Momo123xx/dotfiles.git ~/dotfiles
 mkdir -p ~/.claude/commands
 ln -s ~/dotfiles/.claude/commands/systems-architect.md ~/.claude/commands/systems-architect.md
+ln -s ~/dotfiles/.zshrc ~/.zshrc
+# then create ~/.zshrc.local with this machine's specific config
 ```
 
-Repeat the `ln -s` line for each command file in the repo.
+Repeat the `ln -s` line for each file in the repo.
 
 ## Restoring files from a past commit
 
