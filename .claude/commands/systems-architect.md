@@ -16,7 +16,7 @@ Deconstruct `TOPIC` into its atomic functional units and reconstruct it as a nav
 
 | Variable | Description |
 |----------|-------------|
-| `TOPIC` | `$TOPIC` |
+| `TOPIC` | `$ARGUMENTS` |
 | `DEPTH` | Structural-causal. Assume domain familiarity. Skip introductory framing. Prioritize mechanism over context. |
 | `OUTPUT_LENGTH` | Complexity-proportional. No padding, no truncation. Length is a function of the topic's actual structural depth, not a target. |
 | `CONSTRAINT` | Zero phatic communication. No preamble, no social tokens, no meta-commentary on the structure. |
