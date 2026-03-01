@@ -46,9 +46,14 @@ For each approved item:
 
 Stage and commit all changes with message: `triage: process inbox ([count] nodes)`
 
-### Step 5 — Summary
+### Step 5 — Context drift check
+
+Read each file in `~/braindb/contexts/`. Check if the content still accurately reflects the source nodes it summarizes. If any context bundle is stale (source nodes have changed or new relevant nodes were added), flag it and propose an update. Wait for approval before editing.
+
+### Step 6 — Summary
 
 Report what was processed:
 - New nodes created (with paths)
 - Existing nodes updated (with what changed)
+- Context bundles flagged as stale (and whether updated)
 - Any inbox items skipped and why

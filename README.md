@@ -8,12 +8,12 @@ My Claude Code commands and configuration, managed via symlinks.
 ~/dotfiles/                     ← git repo (source of truth)
   .claude/
     commands/
-      systems-architect.md      ← real file, edit this one
+      systems-architect.md      ← slash commands live here
+      triage.md
   .zshrc                        ← boilerplate, sources .zshrc.local
 
 ~/.claude/
-  commands/
-    systems-architect.md        ← symlink (just a pointer)
+  commands/                     ← symlink to ~/dotfiles/.claude/commands/
 ~/.zshrc                        ← symlink (just a pointer)
 ~/.zshrc.local                  ← plain file, machine-specific, NOT in repo
 ```
@@ -56,13 +56,17 @@ As you identify config that belongs on every machine, promote it up into `dotfil
 
 ```bash
 git clone https://github.com/Momo123xx/dotfiles.git ~/dotfiles
-mkdir -p ~/.claude/commands
-ln -s ~/dotfiles/.claude/commands/systems-architect.md ~/.claude/commands/systems-architect.md
+git clone https://github.com/Momo123xx/brainDB.git ~/braindb
+
+# symlink commands directory (all slash commands at once)
+rm -rf ~/.claude/commands
+ln -s ~/dotfiles/.claude/commands ~/.claude/commands
+
+# symlink shell config
 ln -s ~/dotfiles/.zshrc ~/.zshrc
+
 # then create ~/.zshrc.local with this machine's specific config
 ```
-
-Repeat the `ln -s` line for each file in the repo.
 
 ## Restoring files from a past commit
 
